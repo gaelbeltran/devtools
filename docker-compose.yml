@@ -38,11 +38,14 @@ services:
       - "127.0.0.1:${MYSQL_57_HOST_MACHINE_MYSQL_PORT}:3306"
     volumes:
       - ${MYSQL_57_INITDB_DIR-./config/initdb57}:/docker-entrypoint-initdb.d
-      - ${MYSQL_57_DATA_DIR-./data/mysql57}:/var/lib/mysql
-      - ${MYSQL_57_LOG_DIR-./etc/mysql57/my.cnf}:/var/log/mysql
-      - ${MYSQL_57_CONF_FILE}:/etc/mysql57/my.cnf
+      - ${MYSQL_57_DATA_DIR-./data/mysql57}:/var/lib/mysql:rw
+      - ${MYSQL_57_LOG_DIR-./etc/mysql57/my.cnf}:/var/log/mysql:rw
+      - ${MYSQL_57_CONF_FILE}:/etc/mysql/my.cnf
+    user: mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_57_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_57_DATABASE}
       MYSQL_USER: ${MYSQL_57_USER}
       MYSQL_PASSWORD: ${MYSQL_57_PASSWORD}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
