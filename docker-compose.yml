@@ -49,3 +49,29 @@ services:
       MYSQL_PASSWORD: ${MYSQL_57_PASSWORD}
     extra_hosts:
       - "host.docker.internal:host-gateway"
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+#   openemr7:
+#     restart: always
+#     image: openemr/openemr:7.0.0
+#     ports:
+#       - 8080:80
+#       - 4430:443
+#     volumes:
+#       - openemr7_logs_volume:/var/log
+#       - openemr7_site_volume:/var/www/localhost/htdocs/openemr/sites
+#     environment:
+#       MYSQL_HOST: mysql57
+#       MYSQL_ROOT_PASS: ${MYSQL_57_ROOT_PASSWORD}
+#       MYSQL_USER: ${MYSQL_57_USER}
+#       MYSQL_PASS: ${MYSQL_57_PASSWORD}
+#       OE_USER: ${OPEN_EMR_USER}
+#       OE_PASS: ${OPEN_EMR_PASSWORD}
+#     depends_on:
+#       - mysql57
+# volumes:
+#   openemr7_logs_volume: {}
+#   openemr7_site_volume: {}
